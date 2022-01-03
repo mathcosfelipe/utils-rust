@@ -1,4 +1,62 @@
+fn validate_first_digit(numbers: &Vec<char>) -> usize{
+    
+    let mut count = 10;
+    let mut _sum = 0;
+    for number in numbers {
+        if count >= 2 {
+            let number_int = number.to_string().parse::<usize>().unwrap();
+            _sum += number_int * count;
+            count -= 1;
+        }
+    }
+    
+    let result = (_sum * 10) % 11;
+
+    if result == 10{
+        return 0;
+    }else{
+        return result;
+    }
+}
+
+fn validate_second_digit(numbers: &Vec<char>) -> usize{
+    
+    let mut count = 11;
+    let mut _sum = 0;
+    for number in numbers{
+        if count >= 2 {
+            let number_int = number.to_string().parse::<usize>().unwrap();
+            _sum += number_int * count;
+            count -= 1;
+        }
+    }
+    
+    let result = (_sum * 10) % 11;
+
+    if result == 10{
+        return 0;
+    }else{
+        return result;
+    }
+}
+
+fn equal_digits(numbers: &Vec<char>) -> bool{
+    
+    let mut digit = String::from("");
+
+    for number in numbers {
+        if digit == "" {
+            digit = number.to_string();
+        } else if digit != number.to_string(){
+            return false;
+        }
+    }
+
+    return true;
+}
+
 pub fn validate(value: &str) -> bool{
+    
     let numbers = value
         .chars()
         .filter(|s| !"./-".contains(s.to_owned()))
